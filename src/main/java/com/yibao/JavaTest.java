@@ -32,6 +32,7 @@ public class JavaTest {
         JavaRDD<String> words = lines.flatMap((FlatMapFunction<String, String>) line ->
                 Lists.newArrayList(line.split(" ")).iterator());
 
+
         //将每个单词映射成(word,1)格式
         JavaPairRDD<String, Integer> pairs = words.mapToPair((PairFunction<String, String, Integer>) word -> new Tuple2<>(word, 1));
 
