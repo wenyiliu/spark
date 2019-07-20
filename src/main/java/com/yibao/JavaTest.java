@@ -22,11 +22,13 @@ public class JavaTest {
     public static void main(String[] args) {
 
         //初始化spark应用
-        SparkConf conf = new SparkConf().setAppName("wordcount").setMaster("local[*]");
-        JavaSparkContext sc = new JavaSparkContext(conf);
+        SparkConf conf = new SparkConf().setAppName("wordcount").setMaster("spark://hadoop01:7077");
+//        conf.set("spark.testing.memory",);
+        JavaSparkContext sc;
+        sc = new JavaSparkContext(conf);
 
         //读取文件
-        JavaRDD<String> lines = sc.textFile("data/test.txt");
+        JavaRDD<String> lines = sc.textFile("hdfs://hadoop01:9000/spark_data/word.txt");
 
         //将每一行切割成单词
         JavaRDD<String> words = lines.flatMap((FlatMapFunction<String, String>) line ->
