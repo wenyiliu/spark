@@ -21,7 +21,10 @@ public class AccumulatorVariable {
         List<Integer> integers = Lists.newArrayList(1, 2, 3, 4);
         JavaRDD<Integer> parallelize = sc.parallelize(integers);
         LongAccumulator longAccumulator = sc.sc().longAccumulator("Test");
-        parallelize.foreach((VoidFunction<Integer>) longAccumulator::add);
+        parallelize.foreach((VoidFunction<Integer>)
+                longAccumulator::add);
+
         System.out.println(longAccumulator.value());
+        System.out.println(longAccumulator.sum());
     }
 }
